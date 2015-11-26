@@ -1,0 +1,13 @@
+<Solution>
+  <PropertyGroup Name="BASELA~1" Version="2.3.2.3" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Image Name="HelloWorld.png" />
+        <Project Name="Asteroid.csd" Type="Node" />
+        <Image Name="Asteroid.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
