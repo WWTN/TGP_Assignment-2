@@ -19,5 +19,6 @@ private:
 	cocos2d::Sprite* _sprite;
 	cocos2d::Node* _rootNode;
 	cocos2d::Size _winSize;
+	float _rotation;
 };
 

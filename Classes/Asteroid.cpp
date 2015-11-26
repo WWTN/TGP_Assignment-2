@@ -43,13 +43,15 @@ bool Asteroid::init()
 	// somethings up here, chris plz help crei
 	_winSize = Director::getInstance()->getVisibleSize();
 
-	this->setPosition(Vec2(_winSize.width, _winSize.height));
-	this->setAnchorPoint(Vec2(_winSize.width / 2, _winSize.height / 2));
+	this->setPosition(0.0,0.0);
+	this->setAnchorPoint(Vec2(_winSize.width/2, _winSize.height/2));
 	this->scheduleUpdate();
 
 	_sprite = Sprite::create("Asteroid.png");
 	_rootNode->addChild(_sprite);
-	_sprite->setPosition(_winSize.width/2, _winSize.height/2);
+	_sprite->setPosition(_winSize.width +50, _winSize.height + 50);
+	
+	_rotation = 0;
 	return true;
 }
 
@@ -59,8 +61,17 @@ void Asteroid::update(float deltaTime)
 
 	CheckOutsideScreen();
 
-	sprintf(array, "%f", _sprite->getPositionX());
+	sprintf(array, "%f", _sprite->getPositionY());
 	cocos2d::log(array);
+
+	_rotation = _rotation + 1;
+
+	_sprite->setRotation(_rotation);
+	
+	if (_rotation == 360)
+	{
+		_rotation = 0;
+	}
 
 	if (_outsideScreen == true)
 	{
@@ -72,11 +83,11 @@ void Asteroid::update(float deltaTime)
 
 void Asteroid::CheckOutsideScreen()
 {
-	if (_sprite->getPositionX() > (_winSize.width + 50.0f) || _sprite->getPositionY() > (_winSize.height + 50.0f))
+	if (_sprite->getPositionX() > (_winSize.width + 80.0f) || _sprite->getPositionY() > (_winSize.height + 80.0f))
 	{
 		_outsideScreen = true;
 	}
-	if (_sprite->getPositionY() < 0.0f || (_sprite->getPositionX() < 0.0f))
+	if (_sprite->getPositionY() < -80.0f || (_sprite->getPositionX() < -80.0f))
 	{
 		_outsideScreen = true;
 	}
@@ -84,6 +95,6 @@ void Asteroid::CheckOutsideScreen()
 
 void Asteroid::Reset()
 {
-	_sprite->setPosition(_winSize.width/2, _winSize.height/2);
+	_sprite->setPosition(_winSize.width, _winSize.height);
 }
 
