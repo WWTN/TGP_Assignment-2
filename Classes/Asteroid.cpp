@@ -5,14 +5,14 @@ using namespace cocos2d;
 // debug stuff
 char array[10];
 
-Asteroid::Asteroid()
+Asteroid::Asteroid(Vec2 start, Vec2 end)
 {
 	this->init();
 }
 
-
 Asteroid::~Asteroid()
 {
+
 }
 
 Asteroid* Asteroid::create()
@@ -40,7 +40,6 @@ bool Asteroid::init()
 	auto _rootNode = CSLoader::createNode("Asteroid.csb");
 	addChild(_rootNode);
 
-	// somethings up here, chris plz help crei
 	_winSize = Director::getInstance()->getVisibleSize();
 
 	this->setPosition(0.0,0.0);
@@ -98,3 +97,7 @@ void Asteroid::Reset()
 	_sprite->setPosition(_winSize.width, _winSize.height);
 }
 
+//float lerp(float v0, float v1, float t)
+//{
+
+//}

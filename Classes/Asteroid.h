@@ -1,11 +1,12 @@
 #pragma once
+
 #include "HelloWorldScene.h"
 #include "cocos2d.h"
 
 class Asteroid : public cocos2d::Node
 {
 public:
-	Asteroid();
+	Asteroid(Vec2 start, Vec2 end);
 	~Asteroid();
 
 	static Asteroid* create();
@@ -15,10 +16,15 @@ public:
 	void Reset();
 
 private:
+	// Asteroid Variables
 	bool _outsideScreen;
+	float _rotation;
+	Vec2  _start;
+	Vec2  _end;
+
+	// Cocos Variables
 	cocos2d::Sprite* _sprite;
 	cocos2d::Node* _rootNode;
 	cocos2d::Size _winSize;
-	float _rotation;
 };
 

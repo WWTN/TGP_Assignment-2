@@ -50,6 +50,7 @@ bool HelloWorld::init()
 
 	_asteroid1 = new Asteroid();
 	addChild(_asteroid1);
+
 	// Add the label to give us some feedback on where we have touched
 	labelTouchInfo = Label::createWithSystemFont("Touch or click on the screen", "Arial", 30);
 
@@ -75,6 +76,11 @@ bool HelloWorld::init()
 	
 
     return true;
+}
+
+Vec2 HelloWorld::createStartVector()
+{
+	return Vec2;
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)

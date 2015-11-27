@@ -18,6 +18,8 @@ public:
 	virtual void onTouchMoved(cocos2d::Touch*, cocos2d::Event*);
 	virtual void onTouchCancelled(cocos2d::Touch*, cocos2d::Event*);
 
+	cocos2d::Vec2 createStartVector(); { return Vec2 }
+
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
