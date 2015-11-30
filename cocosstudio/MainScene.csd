@@ -38,6 +38,17 @@
             <FileData Type="Normal" Path="Asteroid.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Asteroids_32x32_003_1" ActionTag="2090439931" Tag="8" IconVisible="False" LeftMargin="166.2215" RightMargin="761.7785" TopMargin="235.7176" BottomMargin="372.2824" ctype="SpriteObjectData">
+            <Size X="32.0000" Y="32.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="182.2215" Y="388.2824" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.1898" Y="0.6067" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="Asteroids_32x32_003.png" Plist="" />
+            <BlendFunc Src="770" Dst="771" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

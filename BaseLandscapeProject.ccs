@@ -7,6 +7,7 @@
         <Image Name="HelloWorld.png" />
         <Project Name="Asteroid.csd" Type="Node" />
         <Image Name="Asteroid.png" />
+        <Image Name="Asteroids_32x32_003.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

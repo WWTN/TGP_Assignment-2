@@ -78,11 +78,6 @@ bool HelloWorld::init()
     return true;
 }
 
-Vec2 HelloWorld::createStartVector()
-{
-	return Vec2;
-}
-
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 	// Create three random numbers that will be the colour of our text

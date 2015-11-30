@@ -6,25 +6,34 @@
 class Asteroid : public cocos2d::Node
 {
 public:
-	Asteroid(Vec2 start, Vec2 end);
+	// Object Constructors
+	Asteroid();
 	~Asteroid();
-
 	static Asteroid* create();
 	virtual bool init() override;
+
+	// Update
 	virtual void update(float);
+
+	// Collision Detection
 	void CheckOutsideScreen();
+
+	// Movement
 	void Reset();
+	cocos2d::Vec2 CreateStartPoint();
+	
 
 private:
 	// Asteroid Variables
-	bool _outsideScreen;
+	bool  _outsideScreen;
 	float _rotation;
-	Vec2  _start;
-	Vec2  _end;
 
 	// Cocos Variables
 	cocos2d::Sprite* _sprite;
-	cocos2d::Node* _rootNode;
-	cocos2d::Size _winSize;
+	cocos2d::Node*	 _rootNode;
+	cocos2d::Size	 _winSize;
+	cocos2d::Vec2	 _start;
+	cocos2d::Vec2	 _end;
+	cocos2d::Vec2	 _startpoints[8];
 };
 

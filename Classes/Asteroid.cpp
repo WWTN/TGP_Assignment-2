@@ -5,7 +5,7 @@ using namespace cocos2d;
 // debug stuff
 char array[10];
 
-Asteroid::Asteroid(Vec2 start, Vec2 end)
+Asteroid::Asteroid()
 {
 	this->init();
 }
@@ -41,14 +41,16 @@ bool Asteroid::init()
 	addChild(_rootNode);
 
 	_winSize = Director::getInstance()->getVisibleSize();
-
+	
 	this->setPosition(0.0,0.0);
 	this->setAnchorPoint(Vec2(_winSize.width/2, _winSize.height/2));
 	this->scheduleUpdate();
 
-	_sprite = Sprite::create("Asteroid.png");
+	_sprite = Sprite::create("Asteroids_32x32_003.png");
 	_rootNode->addChild(_sprite);
 	_sprite->setPosition(_winSize.width +50, _winSize.height + 50);
+
+	_startpoints[] = { (_winSize.width/3, -50), ((_winSize.width/3)*2, -50),   }
 	
 	_rotation = 0;
 	return true;
@@ -94,9 +96,15 @@ void Asteroid::CheckOutsideScreen()
 
 void Asteroid::Reset()
 {
-	_sprite->setPosition(_winSize.width, _winSize.height);
+	_sprite->setPosition(_winSize.width + 50, _winSize.height + 50);
 }
 
+cocos2d::Vec2 Asteroid::CreateStartPoint()
+{
+	int random = cocos2d::RandomHelper::random_int(1, 8);
+
+
+}
 //float lerp(float v0, float v1, float t)
 //{
 
