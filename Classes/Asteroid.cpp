@@ -50,10 +50,18 @@ bool Asteroid::init()
 	_rootNode->addChild(_sprite);
 	_sprite->setPosition(_winSize.width +50, _winSize.height + 50);
 
-	_startpoints[] = { (_winSize.width/3, -50), ((_winSize.width/3)*2, -50),   }
-	
+	_startpoints[1] = Vec2(_winSize.width / 3, -50.0f);
+	_startpoints[2] = Vec2((_winSize.width / 3) * 2, -50.0f);
+	_startpoints[3] = Vec2(_winSize.width + 50, (_winSize.height / 3));
+	_startpoints[4] = Vec2(_winSize.width + 50, (_winSize.height / 3) * 2);
+	_startpoints[5] = Vec2((_winSize.width / 3), _winSize.height + 50);
+	_startpoints[6] = Vec2((_winSize.width / 3) * 2, _winSize.height + 50);
+	_startpoints[7] = Vec2(-50.0f, (_winSize.height / 3));
+	_startpoints[8] = Vec2(-50.0f, (_winSize.height / 3) * 2);
+
 	_rotation = 0;
 	return true;
+
 }
 
 void Asteroid::update(float deltaTime)
@@ -96,14 +104,13 @@ void Asteroid::CheckOutsideScreen()
 
 void Asteroid::Reset()
 {
-	_sprite->setPosition(_winSize.width + 50, _winSize.height + 50);
+	_sprite->setPosition(CreateStartPoint());
 }
 
 cocos2d::Vec2 Asteroid::CreateStartPoint()
 {
 	int random = cocos2d::RandomHelper::random_int(1, 8);
-
-
+	return _startpoints[random];
 }
 //float lerp(float v0, float v1, float t)
 //{
