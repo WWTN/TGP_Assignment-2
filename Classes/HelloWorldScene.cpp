@@ -12,6 +12,7 @@ USING_NS_CC;
 Asteroid* _asteroid1;
 Asteroid* _asteroid2;
 Asteroid* _asteroid3;
+Asteroid* asteroids[3];
 
 using namespace cocostudio::timeline;
 
@@ -57,8 +58,12 @@ bool HelloWorld::init()
 	_asteroid3 = new Asteroid();
 	addChild(_asteroid3);
 
+	asteroids[0] = _asteroid1;
+	asteroids[1] = _asteroid2;
+	asteroids[2] = _asteroid3;
+
 	// Add the label to give us some feedback on where we have touched
-	labelTouchInfo = Label::createWithSystemFont("Touch or click on the screen", "Arial", 30);
+	labelTouchInfo = Label::createWithSystemFont("Kek", "Arial", 30);
 
 	// Set the label to be in the middle of the screen
 	labelTouchInfo->setPosition(cocos2d::Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2));
@@ -79,9 +84,22 @@ bool HelloWorld::init()
 	// Finally, lets add the label to the layer (HelloWorld is a layer, NOT a scene)
 	this->addChild(labelTouchInfo);
 
+	this->scheduleUpdate();
 	
-
     return true;
+}
+
+void HelloWorld::update(float delta)
+{
+	for (int i = 0; i < sizeof(asteroids); i++) {
+		for (int j = 0; j < sizeof(asteroids); j++) {
+			if (j != i) {
+				asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox());
+			}
+		}
+	}
+
+
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)

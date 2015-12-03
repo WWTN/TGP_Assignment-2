@@ -63,6 +63,8 @@ bool Asteroid::init()
 	_rootNode->addChild(_sprite);
 	_sprite->setPosition(CreateStartPoint());
 
+	_asteroidRect.size = _sprite->getBoundingBox().size;
+
 	_speed = 80;
 	_rotation = 0;
 	return true;
@@ -72,18 +74,10 @@ bool Asteroid::init()
 void Asteroid::update(float deltaTime)
 {
 	_currentPoint = Vec2(_sprite->getPositionX(), _sprite->getPositionY());
-
-	_trajectory = (_endPoint - _currentPoint);
-	_trajectory.normalize();
 	
-	_sprite->setPosition(_currentPoint + _trajectory * _speed * deltaTime);
+	_sprite->setPosition(_currentPoint + (_trajectory * _speed) * deltaTime);
 
 	CheckOutsideScreen();
-
-	sprintf(array, "%f", _sprite->getPositionY());
-	cocos2d::log(array);
-	sprintf(array, "%f", _sprite->getPositionX());
-	cocos2d::log(array);
 
 	_rotation = _rotation + 1;
 
@@ -129,31 +123,56 @@ cocos2d::Vec2 Asteroid::CreateStartPoint()
 void Asteroid::CreateEndPoint(float start)
 {
 	// Bottom start
-	if (start == 1 || 2)
+	if (start == 1 || start == 2)
 	{
 		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.width);
 		_endPoint = Vec2(_randEnd, _winSize.height + 100);
 	}
 	// Right start
-	if (start == 3 || 4)
+	if (start == 3 || start == 4)
 	{
 		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.height);
 		_endPoint = Vec2(-100.0f, _randEnd);
 	}
 	// Top start
-	if (start == 5 || 6)
+	if (start == 5 || start == 6)
 	{
 		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.width);
 		_endPoint = Vec2(_randEnd, -100.0f);
 	}
 	// Left start
-	if (start == 7 || 8)
+	if (start == 7 || start == 8)
 	{
 		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.height);
 		_endPoint = Vec2(_winSize.width + 100, _randEnd);
 	}
-}
-//float lerp(float v0, float v1, float t)
-//{
 
-//}
+	SetTrajectory();
+}
+
+void Asteroid::SetTrajectory()
+{
+	_trajectory = (_endPoint - _currentPoint);
+	_trajectory.normalize();
+}
+
+bool Asteroid::HasCollidedWithAsteroid(cocos2d::Rect collisionBoxToCheck)
+{
+	_asteroidRect.origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
+
+	if (_asteroidRect.intersectsRect(collisionBoxToCheck))
+	{
+		_trajectory.x = _trajectory.y;
+		_trajectory.y = -_trajectory.x;
+		_trajectory.normalize();
+		return true;
+	}
+
+	return false;
+}
+
+cocos2d::Rect Asteroid::GetBoundingBox()
+{
+	_asteroidRect.origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
+	return _asteroidRect;
+}
