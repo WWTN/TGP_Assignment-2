@@ -21,6 +21,7 @@ public:
 	// Movement
 	void Reset();
 	cocos2d::Vec2 CreateStartPoint();
+	void CreateEndPoint(float start);
 	
 
 private:
@@ -33,7 +34,7 @@ private:
 	cocos2d::Node*	 _rootNode;
 	cocos2d::Size	 _winSize;
 	cocos2d::Vec2	 _start;
-	cocos2d::Vec2	 _end;
+	cocos2d::Vec2	 _endPoint;
 	cocos2d::Vec2	 _startpoints[8];
 };
 

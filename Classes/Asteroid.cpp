@@ -110,7 +110,16 @@ void Asteroid::Reset()
 cocos2d::Vec2 Asteroid::CreateStartPoint()
 {
 	int random = cocos2d::RandomHelper::random_int(1, 8);
+	CreateEndPoint(random);
 	return _startpoints[random];
+}
+
+void Asteroid::CreateEndPoint(float start)
+{
+	if (start == 1 || 2)
+	{
+		_endPoint = Vec2( ,_winSize.height + 100)
+	}
 }
 //float lerp(float v0, float v1, float t)
 //{
