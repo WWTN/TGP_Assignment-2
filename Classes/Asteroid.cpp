@@ -1,5 +1,7 @@
 #include "Asteroid.h"
 #include "cocostudio\CocoStudio.h"
+#include <stdlib.h>     
+#include <time.h>  
 
 using namespace cocos2d;
 // debug stuff
@@ -40,15 +42,9 @@ bool Asteroid::init()
 	auto _rootNode = CSLoader::createNode("Asteroid.csb");
 	addChild(_rootNode);
 
-	_winSize = Director::getInstance()->getVisibleSize();
-	
-	this->setPosition(0.0,0.0);
-	this->setAnchorPoint(Vec2(_winSize.width/2, _winSize.height/2));
-	this->scheduleUpdate();
+	srand(time(NULL));
 
-	_sprite = Sprite::create("Asteroids_32x32_003.png");
-	_rootNode->addChild(_sprite);
-	_sprite->setPosition(_winSize.width +50, _winSize.height + 50);
+	_winSize = Director::getInstance()->getVisibleSize();
 
 	_startpoints[1] = Vec2(_winSize.width / 3, -50.0f);
 	_startpoints[2] = Vec2((_winSize.width / 3) * 2, -50.0f);
@@ -58,7 +54,16 @@ bool Asteroid::init()
 	_startpoints[6] = Vec2((_winSize.width / 3) * 2, _winSize.height + 50);
 	_startpoints[7] = Vec2(-50.0f, (_winSize.height / 3));
 	_startpoints[8] = Vec2(-50.0f, (_winSize.height / 3) * 2);
+	
+	this->setPosition(0.0,0.0);
+	this->setAnchorPoint(Vec2(_winSize.width/2, _winSize.height/2));
+	this->scheduleUpdate();
 
+	_sprite = Sprite::create("Asteroids_32x32_003.png");
+	_rootNode->addChild(_sprite);
+	_sprite->setPosition(CreateStartPoint());
+
+	_speed = 80;
 	_rotation = 0;
 	return true;
 
@@ -66,11 +71,18 @@ bool Asteroid::init()
 
 void Asteroid::update(float deltaTime)
 {
-	_sprite->setPosition(_sprite->getPositionX() - 200 * deltaTime, _sprite->getPositionY() - 200 * deltaTime);
+	_currentPoint = Vec2(_sprite->getPositionX(), _sprite->getPositionY());
+
+	_trajectory = (_endPoint - _currentPoint);
+	_trajectory.normalize();
+	
+	_sprite->setPosition(_currentPoint + _trajectory * _speed * deltaTime);
 
 	CheckOutsideScreen();
 
 	sprintf(array, "%f", _sprite->getPositionY());
+	cocos2d::log(array);
+	sprintf(array, "%f", _sprite->getPositionX());
 	cocos2d::log(array);
 
 	_rotation = _rotation + 1;
@@ -109,16 +121,36 @@ void Asteroid::Reset()
 
 cocos2d::Vec2 Asteroid::CreateStartPoint()
 {
-	int random = cocos2d::RandomHelper::random_int(1, 8);
-	CreateEndPoint(random);
-	return _startpoints[random];
+	_randStart = cocos2d::RandomHelper::random_int(1, 8);
+	CreateEndPoint(_randStart);
+	return _startpoints[_randStart];
 }
 
 void Asteroid::CreateEndPoint(float start)
 {
+	// Bottom start
 	if (start == 1 || 2)
 	{
-		_endPoint = Vec2( ,_winSize.height + 100)
+		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.width);
+		_endPoint = Vec2(_randEnd, _winSize.height + 100);
+	}
+	// Right start
+	if (start == 3 || 4)
+	{
+		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.height);
+		_endPoint = Vec2(-100.0f, _randEnd);
+	}
+	// Top start
+	if (start == 5 || 6)
+	{
+		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.width);
+		_endPoint = Vec2(_randEnd, -100.0f);
+	}
+	// Left start
+	if (start == 7 || 8)
+	{
+		_randEnd = ((float)rand() / (float)(RAND_MAX)* _winSize.height);
+		_endPoint = Vec2(_winSize.width + 100, _randEnd);
 	}
 }
 //float lerp(float v0, float v1, float t)

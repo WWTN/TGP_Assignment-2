@@ -28,6 +28,9 @@ private:
 	// Asteroid Variables
 	bool  _outsideScreen;
 	float _rotation;
+	float _speed;
+	int   _randStart;
+	float _randEnd;
 
 	// Cocos Variables
 	cocos2d::Sprite* _sprite;
@@ -36,5 +39,7 @@ private:
 	cocos2d::Vec2	 _start;
 	cocos2d::Vec2	 _endPoint;
 	cocos2d::Vec2	 _startpoints[8];
+	cocos2d::Vec2    _currentPoint;
+	cocos2d::Vec2    _trajectory;
 };
 
