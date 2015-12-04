@@ -7,8 +7,9 @@ using namespace cocos2d;
 // debug stuff
 char array[10];
 
-Asteroid::Asteroid()
+Asteroid::Asteroid(int num)
 {
+	_initialStart = num;
 	this->init();
 }
 
@@ -19,7 +20,7 @@ Asteroid::~Asteroid()
 
 Asteroid* Asteroid::create()
 {
-	Asteroid* _asteroid = new Asteroid();
+	Asteroid* _asteroid = new Asteroid(_initialStart);
 	if (_asteroid->init())
 	{
 		_asteroid->autorelease();
@@ -63,11 +64,14 @@ bool Asteroid::init()
 
 	_sprite = Sprite::create("Asteroids_32x32_003.png");
 	_rootNode->addChild(_sprite);
-	_sprite->setPosition(CreateStartPoint());
+	_sprite->setPosition(_startpoints[_initialStart]);
+	CreateEndPoint(_initialStart);
 
 	_asteroidRect->size = _sprite->getBoundingBox().size;
 
-	_speed = 80;
+	_collisionAsteroid = false;
+
+	_speed = 150;
 	_rotation = 0;
 	return true;
 
@@ -76,8 +80,13 @@ bool Asteroid::init()
 void Asteroid::update(float deltaTime)
 {
 	_currentPoint = Vec2(_sprite->getPositionX(), _sprite->getPositionY());
-	
+
 	_sprite->setPosition(_currentPoint + (_trajectory * _speed) * deltaTime);
+
+	if (_collisionAsteroid)
+	{
+		_sprite->setPosition(_currentPoint + (_trajectory * 15));
+	}
 
 	CheckOutsideScreen();
 
@@ -124,7 +133,7 @@ cocos2d::Vec2 Asteroid::CreateStartPoint()
 	return _startpoints[_randStart];
 }
 
-void Asteroid::CreateEndPoint(float start)
+void Asteroid::CreateEndPoint(int start)
 {
 	// Bottom start
 	if (start == 1 || start == 2)
@@ -162,21 +171,27 @@ void Asteroid::SetTrajectory()
 
 bool Asteroid::HasCollidedWithAsteroid(cocos2d::Rect* collisionBoxToCheck)
 {
-
-	/*if (_asteroidRect->intersectsRect(*collisionBoxToCheck))
+	if (!_collisionAsteroid)
 	{
-		_trajectory.x = _trajectory.y;
-		_trajectory.y = -_trajectory.x;
-		_trajectory.normalize();
-		return true;
+		if (_asteroidRect->intersectsRect(*collisionBoxToCheck))
+		{
+			_collisionAsteroid = true;
+			_trajectory.x = _trajectory.y;
+			_trajectory.y = -_trajectory.x;
+			_trajectory.normalize();
+			return true;
+		}
 	}
-	*/
+
+	if (!_asteroidRect->intersectsRect(*collisionBoxToCheck))
+	{
+		_collisionAsteroid = false;
+	}
+	
 	return false;
 }
 
 Rect* Asteroid::GetBoundingBox()
 {
-	cocos2d::Rect* myRect = new cocos2d::Rect();
-	myRect->setRect(_sprite->getPositionX(), _sprite->getPositionY(), 32, 32);
-	return myRect;
+	return _asteroidRect;
 }

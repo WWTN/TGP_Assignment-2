@@ -12,7 +12,8 @@ USING_NS_CC;
 Asteroid* _asteroid1;
 Asteroid* _asteroid2;
 Asteroid* _asteroid3;
-Asteroid* asteroids[3];
+Asteroid* asteroids[4];
+
 
 using namespace cocostudio::timeline;
 
@@ -51,7 +52,13 @@ bool HelloWorld::init()
 	//Schedule Update for when needed
 	//this->scheduleUpdate();
 
-	_asteroid1 = new Asteroid();
+	for (int i = 0; i < 4; i++)
+	{
+		asteroids[i] = new Asteroid(i);
+		addChild(asteroids[i]);
+	}
+
+	/*_asteroid1 = new Asteroid();
 	addChild(_asteroid1);
 	_asteroid2 = new Asteroid();
 	addChild(_asteroid2);
@@ -60,7 +67,7 @@ bool HelloWorld::init()
 
 	asteroids[0] = _asteroid1;
 	asteroids[1] = _asteroid2;
-	asteroids[2] = _asteroid3;
+	asteroids[2] = _asteroid3;*/
 
 	// Add the label to give us some feedback on where we have touched
 	labelTouchInfo = Label::createWithSystemFont("Kek", "Arial", 30);
@@ -91,13 +98,13 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float delta)
 {
-	/*for (int i = 0; i < sizeof(asteroids); i++) {
-		for (int j = 0; j < sizeof(asteroids); j++) {
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
 			if (j != i) {
 				asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox());
 			}
 		}
-	}*/
+	}
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)

@@ -7,9 +7,9 @@ class Asteroid : public cocos2d::Node
 {
 public:
 	// Object Constructors
-	Asteroid();
+	Asteroid(int num);
 	~Asteroid();
-	static Asteroid* create();
+	Asteroid* create();
 	virtual bool init() override;
 
 	// Update
@@ -22,7 +22,7 @@ public:
 	// Movement
 	void Reset();
 	cocos2d::Vec2 CreateStartPoint();
-	void CreateEndPoint(float start);
+	void CreateEndPoint(int start);
 	void SetTrajectory();
 	cocos2d::Rect* GetBoundingBox();
 
@@ -33,6 +33,9 @@ private:
 	float _speed;
 	int   _randStart;
 	float _randEnd;
+	bool  _collisionAsteroid; 
+
+	int   _initialStart;
 
 	// Cocos Variables
 	cocos2d::Sprite* _sprite;
