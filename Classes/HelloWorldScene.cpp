@@ -91,15 +91,13 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float delta)
 {
-	for (int i = 0; i < sizeof(asteroids); i++) {
+	/*for (int i = 0; i < sizeof(asteroids); i++) {
 		for (int j = 0; j < sizeof(asteroids); j++) {
 			if (j != i) {
 				asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox());
 			}
 		}
-	}
-
-
+	}*/
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)

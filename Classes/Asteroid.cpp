@@ -44,6 +44,8 @@ bool Asteroid::init()
 
 	srand(time(NULL));
 
+	_asteroidRect = new Rect();
+
 	_winSize = Director::getInstance()->getVisibleSize();
 
 	_startpoints[1] = Vec2(_winSize.width / 3, -50.0f);
@@ -63,7 +65,7 @@ bool Asteroid::init()
 	_rootNode->addChild(_sprite);
 	_sprite->setPosition(CreateStartPoint());
 
-	_asteroidRect.size = _sprite->getBoundingBox().size;
+	_asteroidRect->size = _sprite->getBoundingBox().size;
 
 	_speed = 80;
 	_rotation = 0;
@@ -82,6 +84,8 @@ void Asteroid::update(float deltaTime)
 	_rotation = _rotation + 1;
 
 	_sprite->setRotation(_rotation);
+
+	_asteroidRect->origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
 	
 	if (_rotation == 360)
 	{
@@ -156,23 +160,23 @@ void Asteroid::SetTrajectory()
 	_trajectory.normalize();
 }
 
-bool Asteroid::HasCollidedWithAsteroid(cocos2d::Rect collisionBoxToCheck)
+bool Asteroid::HasCollidedWithAsteroid(cocos2d::Rect* collisionBoxToCheck)
 {
-	_asteroidRect.origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
 
-	if (_asteroidRect.intersectsRect(collisionBoxToCheck))
+	/*if (_asteroidRect->intersectsRect(*collisionBoxToCheck))
 	{
 		_trajectory.x = _trajectory.y;
 		_trajectory.y = -_trajectory.x;
 		_trajectory.normalize();
 		return true;
 	}
-
+	*/
 	return false;
 }
 
-cocos2d::Rect Asteroid::GetBoundingBox()
+Rect* Asteroid::GetBoundingBox()
 {
-	_asteroidRect.origin = convertToWorldSpaceAR(_sprite->getBoundingBox().origin);
-	return _asteroidRect;
+	cocos2d::Rect* myRect = new cocos2d::Rect();
+	myRect->setRect(_sprite->getPositionX(), _sprite->getPositionY(), 32, 32);
+	return myRect;
 }

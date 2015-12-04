@@ -17,15 +17,14 @@ public:
 
 	// Collision Detection
 	void CheckOutsideScreen();
-	bool HasCollidedWithAsteroid(cocos2d::Rect collisionBoxToCheck);
+	bool HasCollidedWithAsteroid(cocos2d::Rect* collisionBoxToCheck);
 
 	// Movement
 	void Reset();
 	cocos2d::Vec2 CreateStartPoint();
 	void CreateEndPoint(float start);
 	void SetTrajectory();
-	cocos2d::Rect GetBoundingBox();
-	
+	cocos2d::Rect* GetBoundingBox();
 
 private:
 	// Asteroid Variables
@@ -44,6 +43,6 @@ private:
 	cocos2d::Vec2	 _startpoints[8];
 	cocos2d::Vec2    _currentPoint;
 	cocos2d::Vec2    _trajectory;
-	cocos2d::Rect    _asteroidRect;
+	cocos2d::Rect*  _asteroidRect;
 };
 
