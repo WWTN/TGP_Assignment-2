@@ -101,7 +101,11 @@ void HelloWorld::update(float delta)
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			if (j != i) {
-				asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox());
+				if (asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox()))
+				{
+					asteroids[i]->AsteroidBounce(asteroids[j]->GetVec(), asteroids[j]->GetPos());
+					asteroids[j]->AsteroidBounce(asteroids[i]->GetVec(), asteroids[i]->GetPos());
+				}
 			}
 		}
 	}

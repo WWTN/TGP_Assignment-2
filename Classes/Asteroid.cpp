@@ -83,11 +83,6 @@ void Asteroid::update(float deltaTime)
 
 	_sprite->setPosition(_currentPoint + (_trajectory * _speed) * deltaTime);
 
-	if (_collisionAsteroid)
-	{
-		_sprite->setPosition(_currentPoint + (_trajectory * 15));
-	}
-
 	CheckOutsideScreen();
 
 	_rotation = _rotation + 1;
@@ -176,9 +171,6 @@ bool Asteroid::HasCollidedWithAsteroid(cocos2d::Rect* collisionBoxToCheck)
 		if (_asteroidRect->intersectsRect(*collisionBoxToCheck))
 		{
 			_collisionAsteroid = true;
-			_trajectory.x = _trajectory.y;
-			_trajectory.y = -_trajectory.x;
-			_trajectory.normalize();
 			return true;
 		}
 	}
@@ -194,4 +186,28 @@ bool Asteroid::HasCollidedWithAsteroid(cocos2d::Rect* collisionBoxToCheck)
 Rect* Asteroid::GetBoundingBox()
 {
 	return _asteroidRect;
+}
+
+void Asteroid::AsteroidBounce(Vec2 bounceVector, Vec2 collisionPos)
+{
+	Vec2 n = _currentPoint - collisionPos;
+	n.normalize();
+
+	float a1 = _trajectory.dot(n);
+	float a2 = bounceVector.dot(n);
+
+	float optimizedP = (2.0 * (a1 - a2)) / 2;
+
+	_trajectory = _trajectory - optimizedP * n;
+	_sprite->setPosition(_currentPoint + (_trajectory * 10));
+}
+
+Vec2 Asteroid::GetVec()
+{
+	return _trajectory;
+}
+
+Vec2 Asteroid::GetPos()
+{
+	return _currentPoint;
 }

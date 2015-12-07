@@ -25,6 +25,9 @@ public:
 	void CreateEndPoint(int start);
 	void SetTrajectory();
 	cocos2d::Rect* GetBoundingBox();
+	void AsteroidBounce(cocos2d::Vec2 bounceVector, cocos2d::Vec2 collisionPos);
+	cocos2d::Vec2 GetVec();
+	cocos2d::Vec2 GetPos();
 
 private:
 	// Asteroid Variables
