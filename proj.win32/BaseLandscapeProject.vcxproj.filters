@@ -24,6 +24,12 @@
     <ClCompile Include="..\Classes\Asteroid.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\game_player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -36,6 +42,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Asteroid.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\game_player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

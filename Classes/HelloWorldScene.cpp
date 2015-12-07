@@ -9,11 +9,7 @@
 
 USING_NS_CC;
 
-Asteroid* _asteroid1;
-Asteroid* _asteroid2;
-Asteroid* _asteroid3;
 Asteroid* asteroids[4];
-
 
 using namespace cocostudio::timeline;
 
@@ -50,30 +46,22 @@ bool HelloWorld::init()
     addChild(rootNode);
 
 	//Schedule Update for when needed
-	//this->scheduleUpdate();
 
+
+	// Init Asteroids
 	for (int i = 0; i < 4; i++)
 	{
 		asteroids[i] = new Asteroid(i);
 		addChild(asteroids[i]);
 	}
 
-	/*_asteroid1 = new Asteroid();
-	addChild(_asteroid1);
-	_asteroid2 = new Asteroid();
-	addChild(_asteroid2);
-	_asteroid3 = new Asteroid();
-	addChild(_asteroid3);
+	//	game_player obj;
+	// init here
+	game_Ship = (Sprite*)rootNode->getChildByName("game_Ship");
+	invisibleTarget = (Sprite*)rootNode->getChildByName("invisibleTarget");
 
-	asteroids[0] = _asteroid1;
-	asteroids[1] = _asteroid2;
-	asteroids[2] = _asteroid3;*/
+	visibleTarget = (Sprite*)rootNode->getChildByName("visibleTarget");
 
-	// Add the label to give us some feedback on where we have touched
-	labelTouchInfo = Label::createWithSystemFont("Kek", "Arial", 30);
-
-	// Set the label to be in the middle of the screen
-	labelTouchInfo->setPosition(cocos2d::Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2));
 
 	// Create a custom event listener
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -88,9 +76,9 @@ bool HelloWorld::init()
 	// Add the event listener to the event dispatcher
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-	// Finally, lets add the label to the layer (HelloWorld is a layer, NOT a scene)
-	this->addChild(labelTouchInfo);
 
+	startButton = static_cast<ui::Button*>(rootNode->getChildByName("temp_Go"));
+	
 	this->scheduleUpdate();
 	
     return true;
@@ -109,30 +97,41 @@ void HelloWorld::update(float delta)
 			}
 		}
 	}
+
+	game_Ship->setPosition((HelloWorld::game_Ship->getPosition() + trajectory));
+	if (GameManager::sharedGameManager()->isGameLive)
+	{
+
+	}
 }
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	// Create three random numbers that will be the colour of our text
-	GLubyte red = rand() % 255;
-	GLubyte green = rand() % 255;
-	GLubyte blue = rand() % 255;
-	// Create the colour based on our random numbers
-	cocos2d::Color3B myColour = cocos2d::Color3B(red, green, blue);
-	labelTouchInfo->setPosition(touch->getLocation());
-	labelTouchInfo->setString("You pressed HERE!");
-	labelTouchInfo->setColor(myColour);
+	invisibleTarget->setPosition(touch->getLocation());
+	//	if (obj->withinBoundingBox( game_Ship, invisibleTarget) )
+	{
+		targetingOnline = true;
+	}
+
+	Vec2 touchPaths = touch->getLocation();
+
+	trajectory = (Vec2(touchPaths - game_Ship->getPosition()));
+
+	trajectory.normalize();
+
 	return true;
 }
 
 void HelloWorld::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	
+	targetingOnline = false;
 }
 
 void HelloWorld::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-
+	if (targetingOnline){
+		visibleTarget->setPosition(touch->getLocation());
+	}
 }
 
 void HelloWorld::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* event)

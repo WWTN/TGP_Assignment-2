@@ -27,27 +27,53 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Asteroid.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Asteroid_1" ActionTag="326941350" Tag="6" IconVisible="False" LeftMargin="165.0000" RightMargin="765.0000" TopMargin="295.0000" BottomMargin="315.0000" ctype="SpriteObjectData">
-            <Size X="30.0000" Y="30.0000" />
+          <AbstractNodeData Name="game_Ship" ActionTag="305584253" Tag="8" IconVisible="False" LeftMargin="436.0000" RightMargin="444.0000" TopMargin="282.0000" BottomMargin="258.0000" ctype="SpriteObjectData">
+            <Size X="80.0000" Y="100.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="180.0000" Y="330.0000" />
+            <Position X="476.0000" Y="308.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1875" Y="0.5156" />
+            <PrePosition X="0.4958" Y="0.4812" />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="Asteroid.png" Plist="" />
+            <FileData Type="Normal" Path="PlayerShip.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Asteroids_32x32_003_1" ActionTag="2090439931" Tag="8" IconVisible="False" LeftMargin="166.2215" RightMargin="761.7785" TopMargin="235.7176" BottomMargin="372.2824" ctype="SpriteObjectData">
-            <Size X="32.0000" Y="32.0000" />
+          <AbstractNodeData Name="visibleTarget" ActionTag="1594712049" Tag="9" IconVisible="False" LeftMargin="442.5000" RightMargin="446.5000" TopMargin="160.0000" BottomMargin="412.0000" ctype="SpriteObjectData">
+            <Size X="71.0000" Y="68.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="182.2215" Y="388.2824" />
+            <Position X="478.0000" Y="446.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1898" Y="0.6067" />
+            <PrePosition X="0.4979" Y="0.6969" />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="Asteroids_32x32_003.png" Plist="" />
+            <FileData Type="Normal" Path="visibleTarget.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="invisibleTarget" ActionTag="1187273414" Tag="10" IconVisible="False" LeftMargin="679.5000" RightMargin="271.5000" TopMargin="193.5000" BottomMargin="437.5000" ctype="SpriteObjectData">
+            <Size X="9.0000" Y="9.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="684.0000" Y="442.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7125" Y="0.6906" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="invisibleTarget.png" Plist="" />
+            <BlendFunc Src="770" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="temp_Go" ActionTag="13980998" Tag="11" IconVisible="False" LeftMargin="459.9989" RightMargin="454.0011" TopMargin="425.0001" BottomMargin="178.9999" TouchEnable="True" FontSize="14" ButtonText="Button" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="46.0000" Y="36.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="482.9989" Y="196.9999" />
+            <Scale ScaleX="4.3478" ScaleY="2.3889" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5031" Y="0.3078" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+            <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+            <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
