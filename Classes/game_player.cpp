@@ -33,7 +33,7 @@ bool game_player::init()
 	}
 
 	//Load this object in from cocos studio.
-	auto rootNode = CSLoader::createNode("Pipe.csb");
+	auto rootNode = CSLoader::createNode("game_Player.csb");
 	addChild(rootNode);
 
 	//Position this container at left,centre. Anchor point should also be (0.0f, 0.5f).

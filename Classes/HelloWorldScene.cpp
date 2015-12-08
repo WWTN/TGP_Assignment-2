@@ -58,7 +58,7 @@ bool HelloWorld::init()
 	//	game_player obj;
 	// init here
 	game_Ship = (Sprite*)rootNode->getChildByName("game_Ship");
-	invisibleTarget = (Sprite*)rootNode->getChildByName("invisibleTarget");
+	//invisibleTarget = (Sprite*)rootNode->getChildByName("invisibleTarget");
 
 	visibleTarget = (Sprite*)rootNode->getChildByName("visibleTarget");
 
@@ -98,6 +98,11 @@ void HelloWorld::update(float delta)
 		}
 	}
 
+	if (visibleTarget->getOpacity() > 0)
+	{
+		visibleTarget->setOpacity(visibleTarget->getOpacity() - 3);
+	}
+
 	game_Ship->setPosition((HelloWorld::game_Ship->getPosition() + trajectory));
 	if (GameManager::sharedGameManager()->isGameLive)
 	{
@@ -107,13 +112,11 @@ void HelloWorld::update(float delta)
 
 bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	invisibleTarget->setPosition(touch->getLocation());
-	//	if (obj->withinBoundingBox( game_Ship, invisibleTarget) )
-	{
-		targetingOnline = true;
-	}
+	visibleTarget->setPosition(touch->getLocation());
+	visibleTarget->setOpacity(255);
+	
 
-	Vec2 touchPaths = touch->getLocation();
+	Vec2 touchPaths = visibleTarget->getPosition();
 
 	trajectory = (Vec2(touchPaths - game_Ship->getPosition()));
 
@@ -129,9 +132,9 @@ void HelloWorld::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event)
 
 void HelloWorld::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event)
 {
-	if (targetingOnline){
-		visibleTarget->setPosition(touch->getLocation());
-	}
+	//if (targetingOnline){
+	//	visibleTarget->setPosition(touch->getLocation());
+	//}
 }
 
 void HelloWorld::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* event)
