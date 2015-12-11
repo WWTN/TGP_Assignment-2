@@ -10,6 +10,7 @@
 USING_NS_CC;
 
 Asteroid* asteroids[4];
+game_player* playerObj;
 
 using namespace cocostudio::timeline;
 
@@ -49,18 +50,22 @@ bool HelloWorld::init()
 
 
 	// Init Asteroids
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		asteroids[i] = new Asteroid(i);
 		addChild(asteroids[i]);
 	}
 
 	//	game_player obj;
+	playerObj = new game_player;
+
 	// init here
 	game_Ship = (Sprite*)rootNode->getChildByName("game_Ship");
-	//invisibleTarget = (Sprite*)rootNode->getChildByName("invisibleTarget");
+	shipSpeed = 2.0;
 
 	visibleTarget = (Sprite*)rootNode->getChildByName("visibleTarget");
+	Rect collisionBox;
+	collisionBox.size = visibleTarget->getBoundingBox().size;
 
 
 	// Create a custom event listener
@@ -86,8 +91,8 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float delta)
 {
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 10; j++) {
 			if (j != i) {
 				if (asteroids[i]->HasCollidedWithAsteroid(asteroids[j]->GetBoundingBox()))
 				{
@@ -103,7 +108,25 @@ void HelloWorld::update(float delta)
 		visibleTarget->setOpacity(visibleTarget->getOpacity() - 3);
 	}
 
-	game_Ship->setPosition((HelloWorld::game_Ship->getPosition() + trajectory));
+	game_Ship->setPosition((HelloWorld::game_Ship->getPosition() + (trajectory * shipSpeed)));
+
+	if (playerObj->asteroidCollision)
+	{
+		if (shipSpeed > 0)
+		{
+			shipSpeed = shipSpeed - 0.1;
+		}
+		else if (shipSpeed < 0)
+		{
+			shipSpeed = 0;
+		}
+	}
+	else
+	{
+		shipSpeed = shipSpeed + 0.05;
+
+	}
+
 	if (GameManager::sharedGameManager()->isGameLive)
 	{
 
@@ -114,6 +137,7 @@ bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 {
 	visibleTarget->setPosition(touch->getLocation());
 	visibleTarget->setOpacity(255);
+	collisionBox.origin = visibleTarget->getBoundingBox().origin;
 	
 
 	Vec2 touchPaths = visibleTarget->getPosition();
@@ -121,6 +145,7 @@ bool HelloWorld::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event)
 	trajectory = (Vec2(touchPaths - game_Ship->getPosition()));
 
 	trajectory.normalize();
+	shipSpeed = 2.0;
 
 	return true;
 }

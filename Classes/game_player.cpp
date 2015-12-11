@@ -77,20 +77,17 @@ game_player::~game_player()
 
 //-------------------------------------------------------------------------
 
-/*bool game_player::withinBoundingBox( Sprite* ship, Sprite* target)
+bool asteroidCollision(Rect collisionBoxToCheck, Sprite* ship)
 {
 	Rect spaceshipSize;
 	spaceshipSize.size = ship->getBoundingBox().size;
-	spaceshipSize.origin = convertToWorldSpaceAR(ship->getBoundingBox().origin);
-	Rect targetTrack;
-	targetTrack.size = target->getBoundingBox().size;
-	targetTrack.origin = convertToWorldSpaceAR(target->getBoundingBox().origin);
+	spaceshipSize.origin = ship->getBoundingBox().origin;
+	
 
-
-	if (spaceshipSize.intersectsRect(targetTrack))
+	if (spaceshipSize.intersectsRect(collisionBoxToCheck))
 	{ 
 		return true;}
 
 	else
 		return false;
-}*/
+}/*//*/

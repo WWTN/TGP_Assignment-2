@@ -11,7 +11,7 @@
 #include "cocos2d.h"
 #include <stdio.h>
 #include "HelloWorldScene.h"
-
+#include "ui/CocosGUI.h"
 
 
 /////////////////////////////////////////////////////
@@ -21,12 +21,13 @@ class game_player : public cocos2d::Node
 public:
 	game_player();
 	~game_player();
-	virtual bool init() override;
-	 game_player* create();
 
+	 game_player* create();
+	virtual bool init() override;
 	 
-	void         update(float);
-	bool         asteroidCollision(cocos2d::Rect collisionBoxToCheck);
+	 virtual void         update(float);
+
+	bool         asteroidCollision(cocos2d::Rect collisionBoxToCheck, Sprite* ship);
 	void         reset();
 	bool			touchActive;
 

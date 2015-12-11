@@ -25,15 +25,16 @@ public:
 	virtual void onTouchMoved(cocos2d::Touch*, cocos2d::Event*);
 	virtual void onTouchCancelled(cocos2d::Touch*, cocos2d::Event*);
 
-	cocos2d::Sprite*        game_Ship;
+	 cocos2d::Sprite*        game_Ship;
 	cocos2d::Vec2			trajectory;
+	float					shipSpeed;
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
 private:
 	cocos2d::Sprite*        invisibleTarget;
-
+	Rect					collisionBox;
 	cocos2d::Sprite*        visibleTarget;
 	cocos2d::ui::Button*    startButton;
 	bool targetingOnline;

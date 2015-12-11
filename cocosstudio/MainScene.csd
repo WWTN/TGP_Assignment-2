@@ -49,17 +49,6 @@
             <FileData Type="Normal" Path="visibleTarget.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="invisibleTarget" ActionTag="1187273414" Tag="10" IconVisible="False" LeftMargin="679.5000" RightMargin="271.5000" TopMargin="193.5000" BottomMargin="437.5000" ctype="SpriteObjectData">
-            <Size X="9.0000" Y="9.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="684.0000" Y="442.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7125" Y="0.6906" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="invisibleTarget.png" Plist="" />
-            <BlendFunc Src="770" Dst="771" />
-          </AbstractNodeData>
           <AbstractNodeData Name="temp_Go" ActionTag="13980998" Tag="11" IconVisible="False" LeftMargin="459.9989" RightMargin="454.0011" TopMargin="425.0001" BottomMargin="178.9999" TouchEnable="True" FontSize="14" ButtonText="Button" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="46.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -74,6 +63,15 @@
             <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="game_Player" ActionTag="153091517" Tag="9" RotationSkewX="-0.0644" RotationSkewY="-0.0644" IconVisible="True" LeftMargin="474.4968" RightMargin="485.5032" TopMargin="312.9141" BottomMargin="327.0859" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="474.4968" Y="327.0859" />
+            <Scale ScaleX="18.2556" ScaleY="12.0505" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4943" Y="0.5111" />
+            <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
